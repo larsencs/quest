@@ -2,13 +2,16 @@ namespace Quest{
 
     public class Adventurer
     {
-        public string Name {get;}
+        public string Name {get; set;}
         public int Awesomeness {get; set;}
+
+        Robe ColorfulRobe {get; set;}
         
-        public Adventurer(string name)
+        public Adventurer(string name, Robe robe)
         {
-            this.Name = name;
-            this.Awesomeness = 50;
+            Name = name;
+            Awesomeness = 50;
+            ColorfulRobe = robe;
         }
 
         public string GetAdventurerStatus()
@@ -29,6 +32,11 @@ namespace Quest{
             }
 
             return $"Adventurer, {Name} is {status}";
+        }
+
+        public string GetDescription()
+        {
+            return $"{Name} is wearing a {ColorfulRobe.Colors} robe of length {ColorfulRobe.Length}";
         }
     }
 }
