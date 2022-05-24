@@ -27,7 +27,10 @@ namespace Quest
             int minAwesomeness = 0;
             int maxAwesomeness = 100;
 
-            Adventurer theAdventurer = new Adventurer("Jack");
+            Console.Write("Enter your name: ");
+            
+
+            Adventurer theAdventurer = new Adventurer(Console.ReadLine());
 
             List<Challenge> challenges = new List<Challenge>()
             {
