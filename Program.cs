@@ -7,15 +7,23 @@ namespace Quest
     {
         static public void Main(string[] args)
         {
-            Robe robe = new Robe();
-            robe.Colors ="red";
-            robe.Length = 2;
+
+            Prize prize = new Prize("You win a set of steak knives");
+            List<string> colors = new List<string>()
+            {
+                "red",
+                "blue",
+                "green",
+                "orange"
+            };
+            Robe robe = new Robe{Colors=colors, Length=2};
+            Hat hat = new Hat{ShininessLevel = 2};
             Console.Write("Enter your name: ");
-            Adventurer theAdventurer = new Adventurer(Console.ReadLine(), robe);
+            Adventurer theAdventurer = new Adventurer(Console.ReadLine(), robe, hat);
             Console.WriteLine(theAdventurer.GetDescription());
 
             PlayGame(theAdventurer);
-            
+            prize.ShowPrize(theAdventurer);
             Console.WriteLine();
             Console.Write("Would you like to play again? Yes/No: " );
             string answer = Console.ReadLine();
@@ -45,6 +53,7 @@ namespace Quest
             if(theAdventurer.Awesomeness >= maxAwesomeness)
             {
                 Console.WriteLine("You did it! You are truly awesome!");
+                theAdventurer.Successes++;
             }
             else if(theAdventurer.Awesomeness <= minAwesomeness)
             {
@@ -58,36 +67,66 @@ namespace Quest
 
     }
 
+    public static void CreateCharacter(string name)
+    {
+
+
+    }
+
     public static List<Challenge> ChallengeList()
     {
             Challenge twoPlusTwo = new Challenge("2+2", 4, 10);
             Challenge theAnswer = new Challenge("What's the answer to life, the universe and everything?", 42, 25);
             Challenge whatSecond = new Challenge("What is the current second?", DateTime.Now.Second, 50);
+            Challenge swallow = new Challenge("What is the airspeed velocity of an unladen swallow?", 24, 100);
+            Challenge fingers = new Challenge("How many fingers am I holding up?", 0, 10);
 
             int randomNumber = new Random().Next() %10;
 
             Challenge guessRandom = new Challenge("What number am I thinking of?", randomNumber, 25);
             Challenge favoriteBeatle = new Challenge(
-                @"Who's your favorite Beatle?
-                    1) John
-                    2) Paul
-                    3) George
-                    4) Ringo
+            @"Who's your favorite Beatle?
+            1) John
+            2) Paul
+            3) George
+            4) Ringo
                 ",
                 4, 20
             );
 
-                        List<Challenge> challenges = new List<Challenge>()
+            List<Challenge> challenges = new List<Challenge>()
             {
                 twoPlusTwo,
                 theAnswer,
                 whatSecond,
                 guessRandom,
-                favoriteBeatle
+                favoriteBeatle,
+                swallow,
+                 fingers
             };
 
-            return challenges;
+            List<int> indexes = new List<int>();
+            List<Challenge> randomChallenges = new List<Challenge>();
+
+            Random random = new Random();
+            
+
+            while(randomChallenges.Count < 5)
+            {
+                int index = random.Next(0, challenges.Count);
+                if(!indexes.Contains(index))
+                {
+                    indexes.Add(index);
+                    randomChallenges.Add(challenges[index]);
+                }
+                
+            }
+
+            
+            return randomChallenges;
 
     }
+
 }
+
 }

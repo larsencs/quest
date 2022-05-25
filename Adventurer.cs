@@ -1,17 +1,24 @@
+using System;
+using System.Collections.Generic;
+
 namespace Quest{
 
     public class Adventurer
     {
         public string Name {get; set;}
         public int Awesomeness {get; set;}
+        public int Successes {get; set;}
 
-        Robe ColorfulRobe {get; set;}
+        Robe ColorfulRobe {get;}
+        Hat AdventurerHat {get;}
         
-        public Adventurer(string name, Robe robe)
+        public Adventurer(string name, Robe robe, Hat hat)
         {
             Name = name;
-            Awesomeness = 50;
+            Awesomeness = (Successes * 10) + 50;
             ColorfulRobe = robe;
+            AdventurerHat = hat;
+            
         }
 
         public string GetAdventurerStatus()
@@ -36,7 +43,24 @@ namespace Quest{
 
         public string GetDescription()
         {
-            return $"{Name} is wearing a {ColorfulRobe.Colors} robe of length {ColorfulRobe.Length}";
+            string colors = "";
+            for(int i = 0; i< ColorfulRobe.Colors.Count; i++)
+            {
+                if(i == 0)
+                {
+                    colors += $"{ColorfulRobe.Colors[i]}";
+                }
+                else if(i == ColorfulRobe.Colors.Count-1)
+                {
+                    colors += $", and {ColorfulRobe.Colors[i]}";
+                }
+                else
+                {
+                    colors += $", {ColorfulRobe.Colors[i]}";
+                }
+            }
+
+            return $"{Name} is wearing a {colors} color robe of length {ColorfulRobe.Length}, as well as a {AdventurerHat.ShininessDescription()} hat.";
         }
     }
 }

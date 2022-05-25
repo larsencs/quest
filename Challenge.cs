@@ -39,7 +39,7 @@ namespace Quest{
 
 
             //Wouldn't a toString be better here?
-            Console.WriteLine(adventurer.GetAdventurerStatus);
+            Console.WriteLine(adventurer.GetAdventurerStatus());
             Console.WriteLine();
 
         }
